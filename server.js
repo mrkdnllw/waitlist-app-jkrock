@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "omg ni work na!" });
+  res.json({ message: "omg ni work na! this is so amazing!" });
 });
 
 require("./app/routes/waitlistee.routes")(app);
