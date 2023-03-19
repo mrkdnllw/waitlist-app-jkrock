@@ -8,6 +8,8 @@ module.exports = app => {
   
     // Retrieve all Tutorials
     router.get("/", waitlistees.findAll);
+    
+    router.get("/sample1", waitlistees.sample1);
   
     // Retrieve all published Tutorials
     router.get("/published", waitlistees.findAllPublished);

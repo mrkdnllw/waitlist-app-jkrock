@@ -164,3 +164,28 @@ exports.findAllPublished = (req, res) => {
             });
         });
 };
+
+
+exports.sample1 = (req, res) => {
+    // Waitlistee.find({ published: true })
+    //     .then(data => {
+    //         res.send(data);
+    //     })
+    //     .catch(err => {
+    //         res.status(500).send({
+    //             message:
+    //                 err.message || "Some error occurred while retrieving waitlistees."
+    //         });
+    //     });
+
+    try {
+        res.send("heyy!");
+    }
+    catch(e){
+
+        res.status(500).send({message: "sample message"});
+
+    }
+
+ 
+};
