@@ -14,9 +14,9 @@ var corsOptions = {
   origin: "http://127.0.0.1:5501"
 };
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
-
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
