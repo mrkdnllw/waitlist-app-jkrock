@@ -1,0 +1,63 @@
+<form onsubmit="return pd1(event)" id="form1">
+    <div style="padding: 11px;">
+     <input type="hidden" class="form-control" id="waitlist-tag" value="tag1" style="">
+     <div class="form-group">
+      <input type="text" class="form-control" id="waitlist-name" placeholder="Name" required="">
+     </div>
+     <div class="form-group" style="margin-bottom: 10px;">
+      <input type="text" class="form-control" id="waitlist-email" placeholder="E-mail" required="">
+     </div>
+     <a href="https://jkrockhomes.myresman.com/Portal/Applicants/New/BEL?a=1123">
+      <button type="button" id="apply11" style="background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;">
+       APPLY
+      </button>
+     </a>
+     <button type="submit" form="form1" value="Submit" style="background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;">
+      ADD TO WAITLIST
+     </button>
+     <!-- <input type="submit" value="Submit" style="display: inline; background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;"> -->
+     <p id="message13" style="color: green;">
+     </p>
+    </div>
+    <!-- 
+      <input type="submit" value="Submit" style="display: inline; background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;"> -->
+   </form>
+   <script src="https://unpkg.com/axios/dist/axios.min.js">
+   </script>
+   <script>
+    async function pd1(e) {
+          e.preventDefault();
+          await post111();
+          return;
+      }
+      async function post111() {
+          const instance = axios.create({
+              baseURL: "https://jkrock-waitlist-stg.herokuapp.com/api",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+          });
+          const name = $("#waitlist-name").val();
+          const email = $("#waitlist-email").val();
+          // const tag = $("#waitlist-tag").val();
+          const tag = "belmar-1";
+          //alert(tag);
+          try {
+              const res = await instance.post("/waitlistees", {
+                  name: name,
+                  email: email,
+                  tag: tag
+              });
+              const result = {
+                  status: res.status + "-" + res.statusText,
+                  headers: res.headers,
+                  data: res.data,
+              };
+              $("#waitlist-name").val("");
+              $("#waitlist-email").val("");
+              document.getElementById("message13").innerHTML = "Successfully added to waitlist";
+          } catch (err) {
+              alert(err);
+          }
+      }
+   </script>
