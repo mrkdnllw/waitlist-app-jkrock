@@ -21,6 +21,7 @@ exports.create = (req, res) => {
         name: req.body.name,
         email: req.body.email,
         tag: req.body.tag,
+        phone: req.body.phone
         // published: req.body.published ? req.body.published : false
     });
 
