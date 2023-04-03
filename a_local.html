@@ -17,19 +17,50 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-  
+
 </head>
 
 <body>
-    <!--test-->
+
 
     <style>
-        .smf-button {
+        /*backup ni sha*/
+        .collapsible1 {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .collapsible {
             display: block;
-            font-size: 10px;
+            font-size: 9px;
             background-color: rgba(71, 109, 125, .8);
+            width: 200px;
+            color: white;
+
+
+
+        }
+
+        .active,
+        .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: white;
         }
     </style>
+
 
     <form onsubmit="return pd2(event)" id="form1"> <!--pd1 jud ni-->
         <div style="padding: 11px;">
@@ -42,29 +73,24 @@
             </div>
 
 
-            <button class="btn btn-primary m-2 smf-button" type="button" data-toggle="collapse"
-                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <button class="btn btn-primary m-2 collapsible" type="button" aria-expanded="false"
+                aria-controls="collapseExample">
                 Show more fields
             </button>
 
-            <div id="collapseExample" class="collapse">
+            <div class="content">
 
                 <div id="" class="form-group " style="margin-bottom: 10px;">
-
                     <input type="tel" class="form-control" id="phone" name="waitlist-phone" placeholder="123-456-7890">
-                    <!--pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"-->
-                    <!-- <br><br> -->
-
-
 
                 </div>
 
                 <div class="form-group" style="margin-bottom: 10px;">
-                    <input type="text" class="form-control" id="nf1" placeholder="New Field1" >
+                    <input type="text" class="form-control" id="nf1" placeholder="New Field1">
                 </div>
 
                 <div class="form-group" style="margin-bottom: 10px;">
-                    <input type="text" class="form-control" id="nf2" placeholder="New Field2" >
+                    <input type="text" class="form-control" id="nf2" placeholder="New Field2">
                 </div>
 
             </div>
@@ -83,12 +109,10 @@
                 style="background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;">
                 ADD TO WAITLIST
             </button>
-            <!-- <input type="submit" value="Submit" style="display: inline; background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;"> -->
             <p id="message13" style="color: green;">
             </p>
         </div>
-        <!-- 
-          <input type="submit" value="Submit" style="display: inline; background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;"> -->
+
     </form>
     <script src="https://unpkg.com/axios/dist/axios.min.js">
     </script>
@@ -133,7 +157,7 @@
                     data: res.data,
                 };
                 console.log(result);
-                
+
                 $("#waitlist-name").val("");
                 $("#waitlist-email").val("");
                 $("#waitlist-phone").val("");
@@ -143,6 +167,24 @@
             }
         }
     </script>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
+
 
 
 </body>
