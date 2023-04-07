@@ -43,9 +43,6 @@
             background-color: rgba(71, 109, 125, .8);
             width: 200px;
             color: white;
-
-
-
         }
 
         .active,
@@ -60,10 +57,9 @@
             background-color: white;
         }
     </style>
-
-
-    <form onsubmit="return pd2(event)" id="form1"> <!--pd1 jud ni-->
-        <div style="padding: 11px; display: flex; align-items: start;">
+    <form onsubmit="return pd1(event)" id="form1">
+        <!--pd1 jud ni-->
+        <div style="padding: 11px; padding: 11px; display: flex; flex-direction: column;">
             <input type="hidden" class="form-control" id="waitlist-tag" value="tag1" style="">
             <div class="form-group">
                 <input type="text" class="form-control" id="waitlist-name" placeholder="Name" required="">
@@ -71,51 +67,37 @@
             <div class="form-group" style="margin-bottom: 10px;">
                 <input type="text" class="form-control" id="waitlist-email" placeholder="E-mail" required="">
             </div>
-
-<!-- 
-            <button class="btn btn-primary m-2 collapsible" type="button" aria-expanded="false"
-                aria-controls="collapseExample">
-                Show more fields
-            </button> -->
-
+            <!-- 
+                  <button class="btn btn-primary m-2 collapsible" type="button" aria-expanded="false"
+                      aria-controls="collapseExample">
+                      Show more fields
+                  </button> -->
             <div class="content3">
-
                 <div id="" class="form-group " style="margin-bottom: 10px;">
                     <input type="tel" class="form-control" id="phone" name="waitlist-phone" placeholder="123-456-7890">
-
                 </div>
-
                 <!-- <div class="form-group" style="margin-bottom: 10px;">
-                    <input type="text" class="form-control" id="nf1" placeholder="New Field1">
-                </div>
-
-                <div class="form-group" style="margin-bottom: 10px;">
-                    <input type="text" class="form-control" id="nf2" placeholder="New Field2">
-                </div> -->
-
+                          <input type="text" class="form-control" id="nf1" placeholder="New Field1">
+                      </div>
+                      <div class="form-group" style="margin-bottom: 10px;">
+                          <input type="text" class="form-control" id="nf2" placeholder="New Field2">
+                      </div> -->
             </div>
-
-
-
-
-<!-- 
-            <a href="https://jkrockhomes.myresman.com/Portal/Applicants/New/BEL?a=1123">
-                <button type="button" id="apply11"
-                    style="background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;">
-                    APPLY
-                </button>
-            </a> -->
-
-
-
+            <!-- 
+                  <a href="https://jkrockhomes.myresman.com/Portal/Applicants/New/BEL?a=1123">
+                      <button type="button" id="apply11"
+                          style="background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;">
+                          APPLY
+                      </button>
+                  </a> -->
             <button type="submit" form="form1" value="Submit"
-                style="background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px;">
-                ADD TO WAITLIST
+                style="background:rgba(71,109,125,1); min-width: 200px; color:#fff; padding:5px; line-height:24px; align: left;">
+                Submit
             </button>
+            <!--this used to be add to waitlist-->
             <p id="message13" style="color: green;">
             </p>
         </div>
-
     </form>
     <script src="https://unpkg.com/axios/dist/axios.min.js">
     </script>
@@ -125,15 +107,11 @@
             await post111();
             return;
         }
-
         async function pd2(e) {
-
             e.preventDefault();
-
             alert("submit pressed!");
             return;
         }
-
         async function post111() {
             const instance = axios.create({
                 baseURL: "https://jkrock-waitlist-stg.herokuapp.com/api",
@@ -144,7 +122,22 @@
             const name = $("#waitlist-name").val();
             const email = $("#waitlist-email").val();
             // const tag = $("#waitlist-tag").val();
-            const tag = "belmar-1";
+            // const tag = "belmar-1";
+
+            const queryString = window.location.search;
+            console.log(queryString); // Output: "?name=John&age=30"
+            // To get the value of a specific query parameter, you can use the URLSearchParams API:
+            const params = new URLSearchParams(queryString);
+            // console.log(params.get('name')); // Output: "John"
+            // console.log(params.get('age')); // Output: "30"
+            console.log(params.get('tag')); // Output: "30"
+            const tag = params.get('tag');
+
+            console.log("🎈🎈tag: " + tag);
+
+
+
+
             const phone = $("#waitlist-phone").val();
             //alert(tag);
             try {
@@ -160,7 +153,6 @@
                     data: res.data,
                 };
                 console.log(result);
-
                 $("#waitlist-name").val("");
                 $("#waitlist-email").val("");
                 $("#waitlist-phone").val("");
@@ -170,11 +162,9 @@
             }
         }
     </script>
-
     <script>
         var coll = document.getElementsByClassName("collapsible");
         var i;
-
         for (i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function () {
                 this.classList.toggle("active");
@@ -187,47 +177,17 @@
             });
         }
     </script>
-
-    <a href="http://127.0.0.1:5501/a_local_2nd_page.html?name=linda&age=70">
-
-        <button>
-            Query string test
-        </button>
-    </a>
-
-    <a href="http://127.0.0.1:5501/a_local_2nd_page.html?tag=belmar-1">
-
-        <button>
-            Belmar
-        </button>
-    </a>
-
-    
-    <a href="http://127.0.0.1:5501/a_local_2nd_page.html?tag=nakoma">
-
-        <button>
-            Nakoma
-        </button>
-    </a>
-
-
     <script>
-
         // Assuming the URL is https://example.com/?name=John&age=30
-
         const queryString = window.location.search;
-
         console.log(queryString); // Output: "?name=John&age=30"
-
         // To get the value of a specific query parameter, you can use the URLSearchParams API:
-
         const params = new URLSearchParams(queryString);
-
         // console.log(params.get('name')); // Output: "John"
         // console.log(params.get('age')); // Output: "30"
-
         console.log(params.get('tag')); // Output: "30"
     </script>
+
 
 
 
